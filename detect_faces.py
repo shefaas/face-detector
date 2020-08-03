@@ -26,6 +26,8 @@ def imagePreprocessing(image):
 	scaleFactor = 1.0
 	size = (300, 300)
 	# Mean can be a 3-tuple of the RGB means or they can be a single value
+	# to subtract the mean pixel value of the training dataset ILSVRC_2012
+	# (B: 104.0069879317889, G: 116.66876761696767, R: 122.6789143406786)
 	mean = (104.0, 177.0, 123.0)
 
 	blob = cv2.dnn.blobFromImage(resizedImage, scaleFactor, size, mean)
