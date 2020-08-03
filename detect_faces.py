@@ -48,8 +48,8 @@ def drawBoxes(detections, args, image):
 			# draw the bounding box of the face along with the associated probability
 			text = "{:.2f}%".format(confidence * 100)
 			y = startY - 10 if startY - 10 > 10 else startY + 10
-			cv2.rectangle(image, (startX, startY), (endX, endY), (0, 0, 255), 2)
-			cv2.putText(image, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+			cv2.rectangle(image, (startX, startY), (endX, endY), (50, 0, 200), 2)
+			cv2.putText(image, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (50, 0, 200), 2)
 
 
 args = argParsing()
@@ -70,10 +70,11 @@ print("[INFO] computing object detections...")
 net.setInput(blob)
 detections = net.forward()
 
-print(detections)
+#print(detections)
 
-drawBoxes(detections, args, image)
+resizedImage = cv2.resize(image, (int(image.shape[:2][1]/4), int(image.shape[:2][0]/4)))
+drawBoxes(detections, args, resizedImage)
 
 # show the output image
-cv2.imshow("Output", image)
+cv2.imshow("Output", resizedImage)
 cv2.waitKey(0)
